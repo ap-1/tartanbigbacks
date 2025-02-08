@@ -1,7 +1,9 @@
 "use client";
+import { RegisterForm } from "@/app/register/form";
+import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { RegisterForm } from "@/app/register/form";
 
 const Register = () => {
     const searchParams = useSearchParams();
@@ -13,11 +15,23 @@ const Register = () => {
     }
 
     return (
-        <div>
-            <h1 className="text-lg font-bold">Sign in</h1>
+        <div className="flex flex-col items-center justify-center h-screen">
+            <h1 className="text-2xl font-bold mb-4">Sign up</h1>
             <RegisterForm callbackURL={callbackURL} />
+            <Button
+                type="submit"
+                onClick={() => alert("GitHub Login not implemented yet")}
+                className="w-80 mb-4"
+                variant="secondary"
+            >
+                <Github /> Register using GitHub
+            </Button>
             <p>
-                Don't have an account? <Link href={href}>Sign in</Link> instead
+                Don't have an account?{" "}
+                <Link href={href} className="underline">
+                    Sign in
+                </Link>{" "}
+                instead
             </p>
         </div>
     );

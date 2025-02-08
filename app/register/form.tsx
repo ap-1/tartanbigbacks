@@ -61,7 +61,7 @@ export const RegisterForm = ({ callbackURL }: RegisterFormProps) => {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mb-2 w-80">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -75,7 +75,7 @@ export const RegisterForm = ({ callbackURL }: RegisterFormProps) => {
                     control={form.control}
                     name="password"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mb-2 w-80">
                             <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input type="password" {...field} />
@@ -89,7 +89,7 @@ export const RegisterForm = ({ callbackURL }: RegisterFormProps) => {
                     control={form.control}
                     name="name"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mb-8 w-80">
                             <FormLabel>Name</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -99,7 +99,7 @@ export const RegisterForm = ({ callbackURL }: RegisterFormProps) => {
                     )}
                 />
 
-                <Button type="submit">Sign up</Button>
+                <Button type="submit" className="w-80 mb-2">Sign up</Button>
             </form>
         </Form>
     );

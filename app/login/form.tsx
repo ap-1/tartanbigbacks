@@ -62,7 +62,7 @@ export const LoginForm = ({ callbackURL }: LoginFormProps) => {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mb-2 w-80"> 
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input {...field} />
@@ -76,7 +76,7 @@ export const LoginForm = ({ callbackURL }: LoginFormProps) => {
                     control={form.control}
                     name="password"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="mb-4 w-80">
                             <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input type="password" {...field} />
@@ -103,7 +103,7 @@ export const LoginForm = ({ callbackURL }: LoginFormProps) => {
                     )}
                 />
 
-                <Button type="submit">Sign in</Button>
+                <Button type="submit" className="w-80 mb-2">Sign in</Button>
             </form>
         </Form>
     );
