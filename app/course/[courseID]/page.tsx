@@ -25,7 +25,7 @@ const Course = async ({ params }: CourseParams) => {
     const courses = await getUserCourses(session.user.id);
     const data = courses.find(({ course }) => course.id === courseID);
 
-    if (!data) {
+    if (!data || data.course.archived) {
         return notFound();
     }
 

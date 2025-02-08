@@ -112,8 +112,8 @@ export const AppSidebarContent = () => {
                 <Page name="Assignments" courseID={courseID} />
             )}
             {pages.peopleEnabled ?? <Page name="People" courseID={courseID} />}
-            {pages.filesEnabled ?? <Page name="Files" courseID={courseID} />}
             {pages.forumEnabled ?? <Page name="Forum" courseID={courseID} />}
+            {pages.filesEnabled ?? <Page name="Files" courseID={courseID} />}
             {pages.scheduleEnabled ?? (
                 <Page name="Schedule" courseID={courseID} />
             )}
