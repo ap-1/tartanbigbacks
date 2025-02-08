@@ -1,7 +1,8 @@
 "use client";
 import { RegisterForm } from "@/app/register/form";
+import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
-import { Github, LoaderCircle } from "lucide-react";
+import { Github } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -20,7 +21,7 @@ const Register = () => {
 
         href.searchParams.set("callbackURL", pathname);
         setHref(href.toString());
-    })
+    });
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
@@ -47,9 +48,7 @@ const Register = () => {
 
 export default function RegisterPage() {
     return (
-        <Suspense
-            fallback={<LoaderCircle className="h-screen m-auto animate-spin" />}
-        >
+        <Suspense fallback={<Loader />}>
             <Register />
         </Suspense>
     );

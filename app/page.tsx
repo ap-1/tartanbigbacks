@@ -1,9 +1,12 @@
 "use client";
+import { Loader } from "@/components/loader";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 
 const Home = () => {
-    const { data } = authClient.useSession();
+    const { data, isPending } = authClient.useSession();
+
+    if (isPending) return <Loader />;
 
     if (!data) {
         redirect("/login?callbackURL=/");

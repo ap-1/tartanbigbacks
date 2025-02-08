@@ -1,7 +1,8 @@
 "use client";
 import { LoginForm } from "@/app/login/form";
+import { Loader } from "@/components/loader";
 import { Button } from "@/components/ui/button";
-import { Github, LoaderCircle } from "lucide-react";
+import { Github } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -47,9 +48,7 @@ const Login = () => {
 
 export default function LoginPage() {
     return (
-        <Suspense
-            fallback={<LoaderCircle className="h-screen m-auto animate-spin" />}
-        >
+        <Suspense fallback={<Loader />}>
             <Login />
         </Suspense>
     );
