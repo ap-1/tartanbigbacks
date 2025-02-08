@@ -35,7 +35,7 @@ const SignIn = () => {
             ? "/"
             : window.location.pathname;
 
-        href.searchParams.set("callbackURL", pathname);
+        href.searchParams.set("redirect", pathname);
         setHref(href.toString());
     });
 

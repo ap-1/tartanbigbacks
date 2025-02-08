@@ -11,7 +11,8 @@
         "check": "biome check --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true",
         "prepare": "husky",
         "push": "drizzle-kit push",
-        "generate": "drizzle-kit generate"
+        "generate": "drizzle-kit generate",
+        "seed": "bun run ./db/seed.ts"
     },
     "lint-staged": {
         "*": [

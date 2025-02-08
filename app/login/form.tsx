@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { redirect as nextRedirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -27,10 +27,10 @@ const formSchema = z.object({
 export type FormValues = z.infer<typeof formSchema>;
 
 interface LoginFormProps {
-    callbackURL: string | null;
+    redirect: string | null;
 }
 
-export const LoginForm = ({ callbackURL }: LoginFormProps) => {
+export const LoginForm = ({ redirect }: LoginFormProps) => {
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -51,7 +51,7 @@ export const LoginForm = ({ callbackURL }: LoginFormProps) => {
             toast.error(error.message);
         } else if (data) {
             toast.success("Logged in successfully");
-            redirect(callbackURL ?? "/");
+            nextRedirect(redirect ?? "/");
         }
     };
 

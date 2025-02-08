@@ -1,5 +1,4 @@
 "use client";
-import { CourseCard } from "@/components/course-card";
 import { Button } from "@/components/ui/button";
 import {
     Sidebar,
@@ -51,49 +50,8 @@ export function AppSidebar() {
                     </div>
 
                     <SidebarGroupContent>
-                        <SidebarMenu className="pt-6 px-2 flex flex-col gap-y-4">
-                            <CourseCard
-                                course={{
-                                    id: "15-150",
-                                    name: "Principles of Functional Programming",
-                                }}
-                                color="bg-blue-500"
-                            />
-                            <CourseCard
-                                course={{
-                                    id: "15-213",
-                                    name: "Introduction to Computer Systems",
-                                }}
-                                color="bg-green-500"
-                            />
-                            <CourseCard
-                                course={{
-                                    id: "15-251",
-                                    name: "Great Theoretical Ideas in Computer Science",
-                                }}
-                                color="bg-red-500"
-                            />
-                            <CourseCard
-                                course={{
-                                    id: "15-122",
-                                    name: "Principles of Imperative Computation",
-                                }}
-                                color="bg-yellow-500"
-                            />
-                            <CourseCard
-                                course={{
-                                    id: "15-210",
-                                    name: "Parallel and Sequential Data Structures and Algorithms",
-                                }}
-                                color="bg-purple-500"
-                            />
-                            <CourseCard
-                                course={{
-                                    id: "15-451",
-                                    name: "Algorithm Design and Analysis",
-                                }}
-                                color="bg-indigo-500"
-                            />
+                        <SidebarMenu className="pt-6 px-2">
+                            Empty on this page
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

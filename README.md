@@ -4,7 +4,9 @@ Use `bun run dev` to start the project, open [http://localhost:3000](http://loca
 
 ## Database commands
 
-`bun push` `bun generate`
+`bun push` `bun generate` `bun seed`
+
+(do not run these if you do not know what you are doing)
 
 ## .env
 

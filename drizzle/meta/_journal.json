@@ -29,6 +29,20 @@
       "when": 1739023898884,
       "tag": "0003_great_red_hulk",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1739027247203,
+      "tag": "0004_melted_black_panther",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1739028609994,
+      "tag": "0005_gray_skin",
+      "breakpoints": true
     }
   ]
 }

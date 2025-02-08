@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { Github } from "lucide-react";
 import Link from "next/link";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect as nextRedirect, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const Register = () => {
     const searchParams = useSearchParams();
-    const callbackURL = searchParams.get("callbackURL");
+    const redirect = searchParams.get("redirect");
 
     const [href, setHref] = useState("#");
 
@@ -21,7 +21,7 @@ const Register = () => {
             ? "/"
             : window.location.pathname;
 
-        href.searchParams.set("callbackURL", pathname);
+        href.searchParams.set("redirect", pathname);
         setHref(href.toString());
     });
 
@@ -34,14 +34,14 @@ const Register = () => {
             toast.error(error.message);
         } else if (data) {
             toast.success("Logged in successfully");
-            redirect(callbackURL ?? "/");
+            nextRedirect(redirect ?? "/");
         }
     }
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <h1 className="text-2xl font-bold mb-4">Sign up</h1>
-            <RegisterForm callbackURL={callbackURL} />
+            <RegisterForm redirect={redirect} />
             <Button
                 type="submit"
                 onClick={signInWithGitHub}

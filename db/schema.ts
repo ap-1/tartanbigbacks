@@ -9,13 +9,14 @@ export const course = sqliteTable("course", {
     id: text("id").primaryKey(),
     name: text("name").notNull(),
     color: text("color").notNull(),
-    description: text("description"),
+    description: text("description").notNull(),
     filesEnabled: integer("files_enabled", { mode: "boolean" }).notNull(),
     forumEnabled: integer("forum_enabled", { mode: "boolean" }).notNull(),
     assignmentsEnabled: integer("assignments_enabled", {
         mode: "boolean",
     }).notNull(),
     peopleEnabled: integer("people_enabled", { mode: "boolean" }).notNull(),
+    archived: integer("archived", { mode: "boolean" }).notNull(),
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });
