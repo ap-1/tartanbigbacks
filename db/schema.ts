@@ -1,4 +1,18 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import {
+    sqliteTable,
+    text,
+    integer,
+    primaryKey,
+} from "drizzle-orm/sqlite-core";
+
+export const course = sqliteTable("course", {
+    id: text("id").primaryKey(),
+    name: text("name").notNull(),
+    color: text("color").notNull(),
+    description: text("description"),
+    createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
+});
 
 export const user = sqliteTable("user", {
     id: text("id").primaryKey(),
@@ -9,6 +23,20 @@ export const user = sqliteTable("user", {
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });
+
+export const courseUser = sqliteTable(
+    "course_user",
+    {
+        courseId: text("course_id")
+            .notNull()
+            .references(() => course.id),
+        userId: text("user_id")
+            .notNull()
+            .references(() => user.id),
+        role: text("role").notNull(),
+    },
+    (t) => [primaryKey({ columns: [t.courseId, t.userId] })]
+);
 
 export const session = sqliteTable("session", {
     id: text("id").primaryKey(),
