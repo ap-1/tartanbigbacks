@@ -136,7 +136,12 @@ async function createAssignments() {
 
     await addUserToCourse(ANTHONY, "15-213", "professor");
     await addUserToCourse(ANTHONY, "15-150", "professor");
+    await addUserToCourse(ANTHONY, "15-251", "student");
+    await addUserToCourse(ANTHONY, "15-451", "student");
+    await addUserToCourse(ANTHONY, "15-122", "student");
+    await addUserToCourse(ANTHONY, "15-210", "student");
     await addUserToAssignment(ANTHONY, "15-150-hw1");
+    await addUserToAssignment(ANTHONY, "15-251-hw1");
     await addUserToAssignment(ANISH, "15-150-hw1");
 }
 
