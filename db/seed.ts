@@ -1,9 +1,13 @@
-import { createCourse } from "@/db/methods";
+import {
+    addUserToCourse,
+    createAssignmentForAllUsersInCourse,
+    createCourse,
+} from "@/db/methods";
 
-const ADMIN = "5OsqZHvtjSEABgGxcCPKerX9iUJvf7a4";
-const ADMIN2 = "hJZyBR3zAdb4s6uJvzvrWmQBNQUDNZED";
+const ANISH = "5OsqZHvtjSEABgGxcCPKerX9iUJvf7a4";
+const ALEX = "hJZyBR3zAdb4s6uJvzvrWmQBNQUDNZED";
 
-async function main() {
+async function createCourses() {
     await createCourse(
         {
             id: "15-122",
@@ -18,7 +22,7 @@ async function main() {
             scheduleEnabled: false,
             archived: true,
         },
-        ADMIN
+        ANISH
     );
 
     await createCourse(
@@ -34,7 +38,7 @@ async function main() {
             scheduleEnabled: true,
             archived: false,
         },
-        ADMIN
+        ANISH
     );
 
     await createCourse(
@@ -51,7 +55,7 @@ async function main() {
             scheduleEnabled: false,
             archived: true,
         },
-        ADMIN
+        ANISH
     );
 
     createCourse(
@@ -68,7 +72,7 @@ async function main() {
             scheduleEnabled: false,
             archived: true,
         },
-        ADMIN2
+        ALEX
     );
 
     createCourse(
@@ -85,7 +89,7 @@ async function main() {
             scheduleEnabled: true,
             archived: false,
         },
-        ADMIN2
+        ALEX
     );
 
     createCourse(
@@ -102,8 +106,36 @@ async function main() {
             scheduleEnabled: false,
             archived: true,
         },
-        ADMIN2
+        ALEX
     );
+}
+
+async function createAssignments() {
+    await addUserToCourse(ALEX, "15-150", "student");
+    await createAssignmentForAllUsersInCourse({
+        id: "15-150-hw1",
+        courseId: "15-150",
+        professorId: ANISH,
+        name: "Homework 1",
+        description:
+            "Make a function called noNone that does the following: Given a list L of type (int option) list, return true if and only if L contains no values that are NONE.",
+        dueDate: new Date(2025, 1, 12, 11, 59),
+    });
+
+    await addUserToCourse(ANISH, "15-251", "student");
+    await createAssignmentForAllUsersInCourse({
+        id: "15-251-hw1",
+        courseId: "15-251",
+        professorId: ALEX,
+        name: "Homework 1",
+        description: "Sample problem",
+        dueDate: new Date(2025, 1, 12, 11, 59),
+    });
+}
+
+async function main() {
+    await createCourses();
+    await createAssignments();
 }
 
 main();

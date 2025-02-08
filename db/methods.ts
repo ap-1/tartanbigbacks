@@ -1,7 +1,14 @@
-import { course, courseUser, type user } from "@/db/schema";
 import { db } from "@/db";
-import { eq } from "drizzle-orm";
+import {
+    assignment,
+    assignmentStudent,
+    course,
+    courseUser,
+    type user,
+} from "@/db/schema";
+import { and, eq } from "drizzle-orm";
 
+export type Assignment = typeof assignment.$inferInsert;
 export type Course = typeof course.$inferInsert;
 export type User = typeof user.$inferInsert;
 
@@ -33,5 +40,97 @@ export async function getUserCourses(userID: User["id"]) {
         .from(courseUser)
         .innerJoin(course, eq(courseUser.courseId, course.id))
         .where(eq(courseUser.userId, userID))
+        .all();
+}
+
+export async function addUserToCourse(
+    userID: User["id"],
+    courseID: Course["id"],
+    role: "student" | "professor" | "ta"
+) {
+    await db.insert(courseUser).values({
+        userId: userID,
+        courseId: courseID,
+        role,
+    });
+}
+
+export async function createAssignmentForAllUsersInCourse(
+    newAssignment: Omit<Assignment, "createdAt" | "updatedAt">
+) {
+    const now = new Date();
+    await db.insert(assignment).values({
+        ...newAssignment,
+        createdAt: now,
+        updatedAt: now,
+    });
+
+    const assignmentId = newAssignment.id;
+
+    const students = await db
+        .select()
+        .from(courseUser)
+        .where(
+            and(
+                eq(courseUser.courseId, newAssignment.courseId),
+                eq(courseUser.role, "student")
+            )
+        )
+        .all();
+
+    for (const student of students) {
+        await db
+            .insert(assignmentStudent)
+            .values({
+                assignmentId,
+                studentId: student.userId,
+            })
+            .run();
+    }
+}
+
+export async function getUserAssignments(userID: string) {
+    return await db
+        .select({
+            id: assignment.id,
+            name: assignment.name,
+            description: assignment.description,
+            courseId: assignment.courseId,
+            professorId: assignment.professorId,
+            dueDate: assignment.dueDate,
+        })
+        .from(assignment)
+        .innerJoin(
+            assignmentStudent,
+            eq(assignmentStudent.assignmentId, assignment.id)
+        )
+        .where(eq(assignmentStudent.studentId, userID))
+        .all();
+}
+
+export async function getUserAssignmentsForCourse(
+    userID: string,
+    courseID: string
+) {
+    return await db
+        .select({
+            id: assignment.id,
+            name: assignment.name,
+            description: assignment.description,
+            courseId: assignment.courseId,
+            professorId: assignment.professorId,
+            dueDate: assignment.dueDate,
+        })
+        .from(assignment)
+        .innerJoin(
+            assignmentStudent,
+            eq(assignmentStudent.assignmentId, assignment.id)
+        )
+        .where(
+            and(
+                eq(assignmentStudent.studentId, userID),
+                eq(assignment.courseId, courseID)
+            )
+        )
         .all();
 }
