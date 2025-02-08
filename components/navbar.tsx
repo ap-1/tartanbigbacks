@@ -1,10 +1,12 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import { GraduationCap, LogOut } from "lucide-react";
+import { GraduationCap, LogIn, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
-export const Navbar = () => {
+const SignOut = () => {
     const router = useRouter();
 
     const signOut = async () => {
@@ -18,15 +20,44 @@ export const Navbar = () => {
     };
 
     return (
+        <Button onClick={signOut}>
+            <LogOut /> Sign out
+        </Button>
+    );
+};
+
+const SignIn = () => {
+    const router = useRouter();
+    const [href, setHref] = useState("#");
+
+    useEffect(() => {
+        const href = new URL("/login", window.location.origin);
+        href.searchParams.set("callbackURL", window.location.pathname);
+
+        setHref(href.toString());
+    });
+
+    return (
+        <Button onClick={() => router.push(href)}>
+            <LogIn /> Sign in
+        </Button>
+    );
+};
+
+export const Navbar = () => {
+    const { data } = authClient.useSession();
+
+    return (
         <div className="flex justify-between bg-secondary h-16 px-4 items-center">
-            <h1 className="text-2xl font-black my-auto flex flex-row gap-x-1">
+            <Link
+                href="/"
+                className="text-2xl font-black my-auto flex flex-row gap-x-1"
+            >
                 <GraduationCap className="my-auto size-8" />
                 <p className="my-auto">THX</p>
-            </h1>
+            </Link>
 
-            <Button onClick={signOut}>
-                <LogOut /> Sign out
-            </Button>
+            {data ? <SignOut /> : <SignIn />}
         </div>
     );
 };
