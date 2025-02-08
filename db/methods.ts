@@ -4,7 +4,7 @@ import {
     assignmentStudent,
     course,
     courseUser,
-    type user,
+    user,
 } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 
@@ -53,6 +53,20 @@ export async function addUserToCourse(
         courseId: courseID,
         role,
     });
+}
+
+export async function getPeopleInCourse(courseID: Course["id"]) {
+    return await db
+        .select({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: courseUser.role,
+        })
+        .from(courseUser)
+        .innerJoin(user, eq(courseUser.userId, user.id))
+        .where(eq(courseUser.courseId, courseID))
+        .all();
 }
 
 export async function createAssignmentForAllUsersInCourse(

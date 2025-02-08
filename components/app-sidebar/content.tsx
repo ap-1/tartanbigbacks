@@ -21,7 +21,7 @@ const Page = ({ name, courseID }: PageProps) => {
     return (
         <Link
             href={`/course/${courseID}/${name.toLowerCase()}`}
-            className="text-xl hover:bg-secondary transition-all my-2 pl-2 py-2 border-l-8"
+            className="text-xl duration-300 hover:bg-secondary hover:border-blue-500 rounded transition-all my-2 pl-4 py-2 border-l-8"
         >
             {name}
         </Link>
@@ -111,9 +111,9 @@ export const AppSidebarContent = () => {
             {pages.assignmentsEnabled ?? (
                 <Page name="Assignments" courseID={courseID} />
             )}
+            {pages.peopleEnabled ?? <Page name="People" courseID={courseID} />}
             {pages.filesEnabled ?? <Page name="Files" courseID={courseID} />}
             {pages.forumEnabled ?? <Page name="Forum" courseID={courseID} />}
-            {pages.peopleEnabled ?? <Page name="People" courseID={courseID} />}
             {pages.scheduleEnabled ?? (
                 <Page name="Schedule" courseID={courseID} />
             )}
