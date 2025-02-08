@@ -135,12 +135,14 @@ export async function getUserAssignments(userID: string) {
             courseId: assignment.courseId,
             professorId: assignment.professorId,
             dueDate: assignment.dueDate,
+            color: course.color,
         })
         .from(assignment)
         .innerJoin(
             assignmentStudent,
             eq(assignmentStudent.assignmentId, assignment.id)
         )
+        .innerJoin(course, eq(course.id, assignment.courseId))
         .where(eq(assignmentStudent.studentId, userID))
         .all();
 }
@@ -157,12 +159,14 @@ export async function getUserAssignmentsForCourse(
             courseId: assignment.courseId,
             professorId: assignment.professorId,
             dueDate: assignment.dueDate,
+            color: course.color,
         })
         .from(assignment)
         .innerJoin(
             assignmentStudent,
             eq(assignmentStudent.assignmentId, assignment.id)
         )
+        .innerJoin(course, eq(course.id, assignment.courseId))
         .where(
             and(
                 eq(assignmentStudent.studentId, userID),
