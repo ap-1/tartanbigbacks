@@ -28,6 +28,7 @@ const Register = () => {
             <h1 className="text-2xl font-bold mb-4">Sign up</h1>
             <RegisterForm callbackURL={callbackURL} />
             <Button
+                disabled
                 type="submit"
                 onClick={() => alert("GitHub Login not implemented yet")}
                 className="w-80 mb-4"

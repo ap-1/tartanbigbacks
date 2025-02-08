@@ -13,7 +13,7 @@ interface CourseCardProps {
 export const CourseCard = ({ course, color }: CourseCardProps) => {
     return (
         <div className="border rounded hover:bg-secondary cursor-pointer">
-            <div className={cn("w-full h-1 rounded-t", color)} />
+            <div className={cn("w-full h-1 rounded-t-[3px]", color)} />
             <div className="p-2">
                 <p>
                     <span className="font-bold">{course.id}: </span>

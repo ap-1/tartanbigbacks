@@ -28,6 +28,7 @@ const Login = () => {
             <h1 className="text-2xl font-bold mb-4">Sign in</h1>
             <LoginForm callbackURL={callbackURL} />
             <Button
+                disabled
                 type="submit"
                 onClick={() => alert("GitHub Login not implemented yet")}
                 className="w-80 mb-4"
