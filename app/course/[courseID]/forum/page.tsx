@@ -34,6 +34,7 @@ const Forum = async ({ params }: CourseParams) => {
                 <span className="font-bold">{courseID}: </span>
                 {data.course.name}
             </h1>
+            Unimplemented :(
         </div>
     );
 };
