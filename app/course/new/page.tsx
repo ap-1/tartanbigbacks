@@ -14,6 +14,7 @@ const CreateCourse = async () => {
     return (
         <div className="p-8">
              <h1 className="text-3xl font-bold mb-6">Create a course</h1>
+             <p>Unimplemented :(</p>
         </div>
     )
 };

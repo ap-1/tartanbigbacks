@@ -52,9 +52,7 @@ export const Assignment = ({
                 {name}
             </span>
             <br />
-            <span className="bg-green-300 text-green-800 rounded-lg px-2">
-                {description}
-            </span>
+            {description}
         </div>
     );
 };

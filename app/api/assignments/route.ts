@@ -1,5 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getUserAssignments } from "@/db/methods";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
@@ -10,6 +13,14 @@ export async function GET(request: NextRequest) {
             { error: "Missing required parameter 'userID'" },
             { status: 400 }
         );
+    }
+
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+
+    if (!session) {
+        return redirect("/login");
     }
 
     try {
