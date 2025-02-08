@@ -14,7 +14,7 @@ const Login = () => {
     const [href, setHref] = useState("#");
 
     useEffect(() => {
-        const href = new URL("/login", window.location.origin);
+        const href = new URL("/register", window.location.origin);
         const pathname = window.location.pathname.startsWith("/login")
             ? "/"
             : window.location.pathname;

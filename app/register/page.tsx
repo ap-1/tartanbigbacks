@@ -15,7 +15,7 @@ const Register = () => {
 
     useEffect(() => {
         const href = new URL("/login", window.location.origin);
-        const pathname = window.location.pathname.startsWith("/login")
+        const pathname = window.location.pathname.startsWith("/register")
             ? "/"
             : window.location.pathname;
 
