@@ -1,24 +1,22 @@
 "use client";
 import { Loader } from "@/components/loader";
-import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 
-const Home = () => {
+const CreateCourse = () => {
     const { data, isPending } = authClient.useSession();
 
     if (isPending) return <Loader />;
 
     if (!data) {
-        redirect("/login");
+        redirect("/login?redirect=/course/create");
     }
 
     return (
-        <div className="p-8">
-            <h1 className="text-3xl font-bold">My Courses</h1>
-            
+        <div>
+            Create a course
         </div>
-    );
+    )
 };
 
-export default Home;
+export default CreateCourse;

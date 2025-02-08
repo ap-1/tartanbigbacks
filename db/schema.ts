@@ -56,11 +56,25 @@ export const coursePostComment = sqliteTable("course_post_comment", {
     userId: text("user_id")
         .notNull()
         .references(() => user.id),
-    comment: text("comment").notNull(),
+    content: text("content").notNull(),
     isAnonymous: integer("is_anonymous", { mode: "boolean" }).notNull(),
+    isSolution: integer("is_solution", { mode: "boolean" }).notNull(),
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
 });
+
+export const coursePostCommentParent = sqliteTable(
+    "course_post_comment_parent",
+    {
+        childCommentId: text("child_comment_id")
+            .notNull()
+            .references(() => coursePostComment.id),
+        parentCommentId: text("parent_comment_id")
+            .notNull()
+            .references(() => coursePostComment.id),
+    },
+    (t) => [primaryKey({ columns: [t.childCommentId, t.parentCommentId] })]
+);
 
 export const courseUser = sqliteTable(
     "course_user",
