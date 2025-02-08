@@ -1,0 +1,6 @@
+val true = noNone []
+val true = noNone [SOME 1, SOME 3, SOME 5, SOME 7]
+val false = noNone [SOME 3, NONE, SOME 1]
+val true = noNone [SOME 2]
+val false = noNone [NONE, NONE, SOME 8]
+val false = noNone [SOME 7, SOME 5, SOME 4, SOME 3, NONE]
