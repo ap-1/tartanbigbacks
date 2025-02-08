@@ -16,6 +16,7 @@ export const course = sqliteTable("course", {
         mode: "boolean",
     }).notNull(),
     peopleEnabled: integer("people_enabled", { mode: "boolean" }).notNull(),
+    scheduleEnabled: integer("schedule_enabled", { mode: "boolean" }).notNull(),
     archived: integer("archived", { mode: "boolean" }).notNull(),
     createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
     updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),

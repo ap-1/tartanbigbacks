@@ -1,6 +1,7 @@
 import { createCourse } from "@/db/methods";
 
-const ADMIN = "mWHsUCJYVDagUJKk64kWcGYGXoRhdTe8";
+const ADMIN = "5OsqZHvtjSEABgGxcCPKerX9iUJvf7a4";
+const ADMIN2 = "hJZyBR3zAdb4s6uJvzvrWmQBNQUDNZED";
 
 async function main() {
     await createCourse(
@@ -14,6 +15,7 @@ async function main() {
             forumEnabled: false,
             assignmentsEnabled: false,
             peopleEnabled: false,
+            scheduleEnabled: false,
             archived: true,
         },
         ADMIN
@@ -29,6 +31,7 @@ async function main() {
             forumEnabled: true,
             assignmentsEnabled: true,
             peopleEnabled: true,
+            scheduleEnabled: true,
             archived: false,
         },
         ADMIN
@@ -45,6 +48,7 @@ async function main() {
             forumEnabled: false,
             assignmentsEnabled: false,
             peopleEnabled: false,
+            scheduleEnabled: false,
             archived: true,
         },
         ADMIN
@@ -61,9 +65,10 @@ async function main() {
             forumEnabled: false,
             assignmentsEnabled: false,
             peopleEnabled: false,
+            scheduleEnabled: false,
             archived: true,
         },
-        ADMIN
+        ADMIN2
     );
 
     createCourse(
@@ -73,13 +78,14 @@ async function main() {
             description:
                 "This course is about how to use theoretical ideas to formulate and solve problems in computer science. It integrates mathematical material with general problem solving techniques and computer science applications. Examples are drawn from algorithms, complexity theory, game theory, probability theory, graph theory, automata theory, algebra, cryptography, and combinatorics. Assignments involve both mathematical proofs and programming. NOTE: students must achieve a C or better in order to use this course to satisfy the pre-requisite for any subsequent Computer Science course.",
             color: "bg-red-500",
-            filesEnabled: false,
-            forumEnabled: false,
-            assignmentsEnabled: false,
-            peopleEnabled: false,
-            archived: true,
+            filesEnabled: true,
+            forumEnabled: true,
+            assignmentsEnabled: true,
+            peopleEnabled: true,
+            scheduleEnabled: true,
+            archived: false,
         },
-        ADMIN
+        ADMIN2
     );
 
     createCourse(
@@ -93,9 +99,10 @@ async function main() {
             forumEnabled: false,
             assignmentsEnabled: false,
             peopleEnabled: false,
+            scheduleEnabled: false,
             archived: true,
         },
-        ADMIN
+        ADMIN2
     );
 }
 

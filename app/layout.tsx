@@ -1,11 +1,12 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { Auth } from "@/components/auth";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
 import "./globals.css";
-import { Auth } from "@/components/auth";
 
 const satoshi = localFont({
     src: "./fonts/Satoshi-Variable.woff2",

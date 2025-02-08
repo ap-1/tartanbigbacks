@@ -34,7 +34,7 @@ const CreateCourse = async ({ params }: CreateCourseParams) => {
                 <span className="font-bold">{courseID}: </span>
                 {data.course.name}
             </h1>
-            <p className="text-gray-700">{data.course.description}</p>
+            <p className="text-foreground">{data.course.description}</p>
         </div>
     );
 };
