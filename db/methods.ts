@@ -69,6 +69,19 @@ export async function getPeopleInCourse(courseID: Course["id"]) {
         .all();
 }
 
+export async function getSharedCoursesWithUser(userID: User["id"]) {
+    return await db
+        .select({
+            id: course.id,
+            name: course.name,
+            role: courseUser.role,
+        })
+        .from(courseUser)
+        .innerJoin(course, eq(courseUser.courseId, course.id))
+        .where(eq(courseUser.userId, userID))
+        .all();
+}
+
 export async function createAssignmentForAllUsersInCourse(
     newAssignment: Omit<Assignment, "createdAt" | "updatedAt">
 ) {

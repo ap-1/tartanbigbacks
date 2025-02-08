@@ -1,19 +1,51 @@
-import { getPeopleInCourse, getUserCourses } from "@/db/methods";
+import {
+    getPeopleInCourse,
+    getSharedCoursesWithUser,
+    getUserCourses,
+} from "@/db/methods";
 import { auth } from "@/lib/auth";
+import { cn } from "@/lib/utils";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
-type PersonProps = Awaited<ReturnType<typeof getPeopleInCourse>>[number];
+type PersonProps = Awaited<ReturnType<typeof getPeopleInCourse>>[number] & {
+    shared: ReturnType<typeof getSharedCoursesWithUser>;
+};
 
-const Person = ({ id, name, email, role }: PersonProps) => {
+const Person = async ({ id, name, email, role, shared }: PersonProps) => {
+    const sharedCourses = await getSharedCoursesWithUser(id);
+
     return (
         <div className="rounded border p-4 my-4">
-            <h2 className="text-xl font-bold">{name}</h2>
+            <h2 className="text-xl">
+                <span className="font-bold">{name} </span>&middot;
+                <span> {role}</span>
+            </h2>
             <Link href={`mailto:${email}`} className="underline text-blue-500">
                 {email}
             </Link>
-            <p>{role}</p>
+            <p className="mt-2">
+                Shares{" "}
+                {sharedCourses
+                    .map((course) => course.id)
+                    .map((id, i) => (
+                        <span
+                            key={id}
+                            className={cn(
+                                i % 2 === 0
+                                    ? "bg-blue-300 text-blue-800"
+                                    : "bg-red-300 text-red-800",
+                                "rounded-lg px-2"
+                            )}
+                        >
+                            {id}
+                        </span>
+                    ))
+                    //@ts-ignore
+                    .reduce((prev, curr) => [prev, ", ", curr])}{" "}
+                with you
+            </p>
         </div>
     );
 };
@@ -66,7 +98,11 @@ const People = async ({ params }: CourseParams) => {
                 {data.course.name}
             </h1>
             {sortedPeople.map((person) => (
-                <Person key={person.id} {...person} />
+                <Person
+                    key={person.id}
+                    {...person}
+                    shared={getSharedCoursesWithUser(person.id)}
+                />
             ))}
         </div>
     );

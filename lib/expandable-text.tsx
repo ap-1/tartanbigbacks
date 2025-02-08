@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { type MouseEventHandler, useState } from "react";
 
 interface ExpandableTextProps {
     text: string;
@@ -13,7 +13,8 @@ export function ExpandableText({ text, maxLength = 150 }: ExpandableTextProps) {
         return <p className="text-foreground">{text}</p>;
     }
 
-    const toggleExpand = () => {
+    const toggleExpand: MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
         setIsExpanded((prev) => !prev);
     };
 
