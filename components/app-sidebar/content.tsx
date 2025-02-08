@@ -21,7 +21,7 @@ const Page = ({ name, courseID }: PageProps) => {
     return (
         <Link
             href={`/course/${courseID}/${name.toLowerCase()}`}
-            className="text-xl duration-300 hover:bg-secondary hover:border-blue-500 rounded transition-all my-2 pl-4 py-2 border-l-8"
+            className="text-xl duration-300 hover:bg-secondary hover:border-black rounded transition-all my-2 pl-4 py-2 border-l-8"
         >
             {name}
         </Link>
