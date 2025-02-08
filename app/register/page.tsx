@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { LoginForm } from "@/app/login/form";
+import { RegisterForm } from "@/app/register/form";
 
-const Login = () => {
+const Register = () => {
     const searchParams = useSearchParams();
     const callbackURL = searchParams.get("callbackURL");
 
-    const href = new URL("/register", window.location.origin);
+    const href = new URL("/login", window.location.origin);
     if (callbackURL) {
         href.searchParams.set("callbackURL", callbackURL);
     }
@@ -15,13 +15,12 @@ const Login = () => {
     return (
         <div>
             <h1 className="text-lg font-bold">Sign in</h1>
-            <LoginForm callbackURL={callbackURL} />
+            <RegisterForm callbackURL={callbackURL} />
             <p>
-                Already have an account? <Link href={href}>Sign up</Link>{" "}
-                instead
+                Don't have an account? <Link href={href}>Sign in</Link> instead
             </p>
         </div>
     );
 };
 
-export default Login;
+export default Register;

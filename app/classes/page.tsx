@@ -6,7 +6,7 @@ const Classes = () => {
     const { data } = authClient.useSession();
 
     if (!data) {
-        return redirect("/login");
+        redirect("/login?callbackURL=/classes");
     }
 
     return <div>You are signed in</div>;

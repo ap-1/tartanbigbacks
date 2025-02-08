@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
+import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,7 +19,11 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body>
-                <ThemeProvider>{children}</ThemeProvider>
+                <ThemeProvider>
+                    <Navbar />
+                    {children}
+                    <Toaster />
+                </ThemeProvider>
             </body>
         </html>
     );
