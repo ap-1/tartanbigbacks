@@ -1,18 +1,24 @@
 "use client";
 import { LoginForm } from "@/app/login/form";
 import { Button } from "@/components/ui/button";
-import { Github } from "lucide-react";
+import { Github, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 
 const Login = () => {
     const searchParams = useSearchParams();
     const callbackURL = searchParams.get("callbackURL");
 
-    const href = new URL("/register", window.location.origin);
-    if (callbackURL) {
-        href.searchParams.set("callbackURL", callbackURL);
-    }
+    const [href, setHref] = useState("#");
+
+    useEffect(() => {
+        const href = new URL("/login", window.location.origin);
+        if (callbackURL) {
+            href.searchParams.set("callbackURL", callbackURL);
+        }
+        setHref(href.toString());
+    });
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">
@@ -27,11 +33,22 @@ const Login = () => {
                 <Github /> Log in using GitHub
             </Button>
             <p>
-                Already have an account? <Link href={href} className="underline">Sign up</Link>{" "}
+                Already have an account?{" "}
+                <Link href={href} className="underline">
+                    Sign up
+                </Link>{" "}
                 instead
             </p>
         </div>
     );
 };
 
-export default Login;
+export default function LoginPage() {
+    return (
+        <Suspense
+            fallback={<LoaderCircle className="h-screen m-auto animate-spin" />}
+        >
+            <Login />
+        </Suspense>
+    );
+}
