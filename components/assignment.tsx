@@ -57,7 +57,7 @@ export const Assignment = ({
         try {
             setResponseMessage("Waiting for autograder...");
             const response = await fetch(
-                "http://54.226.164.65:5000/submit/no_none",
+                'https://54.226.164.65:5000/submit/no_none',
                 {
                     method: "POST",
                     body: formData,
