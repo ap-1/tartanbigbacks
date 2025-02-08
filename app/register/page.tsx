@@ -37,7 +37,7 @@ const Register = () => {
                 <Github /> Register using GitHub
             </Button>
             <p>
-                Don't have an account?{" "}
+                Already have an account?{" "}
                 <Link href={href} className="underline">
                     Sign in
                 </Link>{" "}

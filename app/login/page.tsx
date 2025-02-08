@@ -37,7 +37,7 @@ const Login = () => {
                 <Github /> Log in using GitHub
             </Button>
             <p>
-                Already have an account?{" "}
+                Don't have an account?{" "}
                 <Link href={href} className="underline">
                     Sign up
                 </Link>{" "}

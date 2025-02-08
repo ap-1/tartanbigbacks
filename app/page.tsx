@@ -9,7 +9,7 @@ const Home = () => {
     if (isPending) return <Loader />;
 
     if (!data) {
-        redirect("/login?callbackURL=/");
+        redirect("/login");
     }
 
     return <div>You are signed in</div>;
