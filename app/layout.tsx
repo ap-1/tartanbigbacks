@@ -1,11 +1,11 @@
+import { AppSidebar } from "@/components/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import localFont from "next/font/local";
-
-import { Navbar } from "@/components/navbar";
-import { Toaster } from "@/components/ui/sonner";
-
 import "./globals.css";
+import { Auth } from "@/components/auth";
 
 const satoshi = localFont({
     src: "./fonts/Satoshi-Variable.woff2",
@@ -13,7 +13,7 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Project",
+    title: "HIT",
     description: "For TartanHacks 2025",
 };
 
@@ -23,11 +23,21 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning className={satoshi.className}>
+        <html
+            lang="en"
+            suppressHydrationWarning
+            className={`${satoshi.className} antialiased`}
+        >
             <body>
-                <ThemeProvider>
-                    <Navbar />
-                    {children}
+                <ThemeProvider attribute="class">
+                    <SidebarProvider>
+                        <AppSidebar />
+                        <main className="w-full">
+                            <SidebarTrigger className="scale-[125%] ml-6 mt-6" />
+                            <Auth />
+                            {children}
+                        </main>
+                    </SidebarProvider>
                     <Toaster />
                 </ThemeProvider>
             </body>

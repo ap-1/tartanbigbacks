@@ -1,11 +1,12 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { authClient } from "@/lib/auth-client";
-import { LogIn, LogOut } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import {
+    LogIn,
+    LogOut,
+} from "lucide-react";
+import { authClient } from "@/lib/auth-client";
+import { Button } from "@/components/ui/button";
 
 const SignOut = () => {
     const router = useRouter();
@@ -45,23 +46,12 @@ const SignIn = () => {
     );
 };
 
-export const Navbar = () => {
+export const Auth = () => {
     const { data } = authClient.useSession();
-
+    
     return (
-        <div className="flex justify-between bg-secondary h-24 px-4 items-center">
-            <Link href="/" className="font-black my-auto flex flex-row gap-x-1">
-                <Image
-                    src="/icon.svg"
-                    className="my-auto size-16"
-                    alt="Andrew Carnegie"
-                    width={32}
-                    height={32}
-                />
-                <p className="my-auto text-4xl">HIT</p>
-            </Link>
-
+        <div className="fixed right-6 top-6">
             {data ? <SignOut /> : <SignIn />}
         </div>
-    );
-};
+    )
+}
