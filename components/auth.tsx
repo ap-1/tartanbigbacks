@@ -1,10 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-    LogIn,
-    LogOut,
-} from "lucide-react";
+import { LogIn, LogOut } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 
@@ -15,7 +12,7 @@ const SignOut = () => {
         await authClient.signOut({
             fetchOptions: {
                 onSuccess: () => {
-                    router.push("/login");
+                    router.push("/");
                 },
             },
         });
@@ -34,8 +31,11 @@ const SignIn = () => {
 
     useEffect(() => {
         const href = new URL("/login", window.location.origin);
-        href.searchParams.set("callbackURL", window.location.pathname);
+        const pathname = window.location.pathname.startsWith("/login")
+            ? "/"
+            : window.location.pathname;
 
+        href.searchParams.set("callbackURL", pathname);
         setHref(href.toString());
     });
 
@@ -48,10 +48,10 @@ const SignIn = () => {
 
 export const Auth = () => {
     const { data } = authClient.useSession();
-    
+
     return (
         <div className="fixed right-6 top-6">
             {data ? <SignOut /> : <SignIn />}
         </div>
-    )
-}
+    );
+};

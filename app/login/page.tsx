@@ -14,9 +14,11 @@ const Login = () => {
 
     useEffect(() => {
         const href = new URL("/login", window.location.origin);
-        if (callbackURL) {
-            href.searchParams.set("callbackURL", callbackURL);
-        }
+        const pathname = window.location.pathname.startsWith("/login")
+            ? "/"
+            : window.location.pathname;
+
+        href.searchParams.set("callbackURL", pathname);
         setHref(href.toString());
     });
 
