@@ -1,4 +1,5 @@
 import {
+    addUserToAssignment,
     addUserToCourse,
     createAssignmentForAllUsersInCourse,
     createCourse,
@@ -6,6 +7,7 @@ import {
 
 const ANISH = "5OsqZHvtjSEABgGxcCPKerX9iUJvf7a4";
 const ALEX = "hJZyBR3zAdb4s6uJvzvrWmQBNQUDNZED";
+const ANTHONY = "7AfJLwZ5CtB87KASb9gbw2Uqzodp8d5L";
 
 async function createCourses() {
     await createCourse(
@@ -131,6 +133,11 @@ async function createAssignments() {
         description: "Sample problem",
         dueDate: new Date(2025, 1, 12, 11, 59),
     });
+
+    await addUserToCourse(ANTHONY, "15-213", "professor");
+    await addUserToCourse(ANTHONY, "15-150", "professor");
+    await addUserToAssignment(ANTHONY, "15-150-hw1");
+    await addUserToAssignment(ANISH, "15-150-hw1");
 }
 
 async function main() {

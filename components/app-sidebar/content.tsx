@@ -85,7 +85,7 @@ export const AppSidebarContent = () => {
                         <p>No assignments—you're all caught up!</p>
                     ) : (
                         assignments.map((assignment: AssignmentProps) => (
-                            <Assignment key={assignment.name} {...assignment} />
+                            <Assignment key={assignment.id} {...assignment} />
                         ))
                     )}
                 </div>

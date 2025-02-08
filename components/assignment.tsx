@@ -1,5 +1,6 @@
 "use client";
 import type { getUserAssignments } from "@/db/methods";
+import { ExpandableText } from "@/lib/expandable-text";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import type { KeyboardEventHandler } from "react";
@@ -52,7 +53,7 @@ export const Assignment = ({
                 {name}
             </span>
             <br />
-            {description}
+            <ExpandableText text={description} maxLength={100} />
         </div>
     );
 };

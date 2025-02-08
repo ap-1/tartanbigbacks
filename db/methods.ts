@@ -89,6 +89,16 @@ export async function createAssignmentForAllUsersInCourse(
     }
 }
 
+export async function addUserToAssignment(
+    userID: User["id"],
+    assignmentID: Assignment["id"]
+) {
+    await db.insert(assignmentStudent).values({
+        studentId: userID,
+        assignmentId: assignmentID,
+    });
+}
+
 export async function getUserAssignments(userID: string) {
     return await db
         .select({
