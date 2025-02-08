@@ -9,11 +9,9 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 
-type PersonProps = Awaited<ReturnType<typeof getPeopleInCourse>>[number] & {
-    shared: ReturnType<typeof getSharedCoursesWithUser>;
-};
+type PersonProps = Awaited<ReturnType<typeof getPeopleInCourse>>[number];
 
-const Person = async ({ id, name, email, role, shared }: PersonProps) => {
+const Person = async ({ id, name, email, role }: PersonProps) => {
     const sharedCourses = await getSharedCoursesWithUser(id);
 
     return (
@@ -98,11 +96,7 @@ const People = async ({ params }: CourseParams) => {
                 {data.course.name}
             </h1>
             {sortedPeople.map((person) => (
-                <Person
-                    key={person.id}
-                    {...person}
-                    shared={getSharedCoursesWithUser(person.id)}
-                />
+                <Person key={person.id} {...person} />
             ))}
         </div>
     );
